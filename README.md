@@ -1,5 +1,8 @@
 # UK Credit Memo AI — Local RAG (FCA/PRA aligned)
 
+> **RAG application with automation coverage** — a local UK credit-memo RAG app together with its
+> full test strategy, visual reports and CI gate.
+
 KB is UK-standards-only: `data/knowledge_base/uk_*.txt` (15 docs, no cloud).
 User credit memos go to `data/memos/` and are NEVER indexed — they are analysed against the UK KB.
 
