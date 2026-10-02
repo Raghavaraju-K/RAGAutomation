@@ -41,12 +41,16 @@ jobs:
       - name: Run RAG evaluation (100 golden questions)
         run: python run_eval.py
 
-      # 2. Developer-owned unit tests (separate step so failures are clearly attributed)
+      # 2. Developer-owned unit tests (separate step so failures are clearly attributed).
+      #    `!cancelled()` on the steps below -> a failure here still lets the suite run
+      #    and the report build, so CI always publishes a report (job stays red either way).
       - name: Run unit tests
+        if: ${{ !cancelled() }}
         run: pytest -q -m unit --junitxml reports/.internal/junit_unit.xml
 
       # 3. Automation suite - the scope of the reports below (unit tests excluded)
       - name: Run automation suite
+        if: ${{ !cancelled() }}
         run: >
           pytest -q -m "not unit"
           --html reports/automation_report.html
@@ -54,8 +58,11 @@ jobs:
           --cucumberjson reports/cucumber.json
           --junitxml reports/.internal/junit.xml
 
-      # 4. Visual dashboard from the JUnit feed + eval report
-      - name: Build automation dashboard
+      # 4. Visual dashboard from the JUnit feed + eval report.
+      #    `!cancelled()` -> the report is generated even when the suite FAILED,
+      #    which is exactly when you need it (the JUnit feed is written either way).
+      - name: Build automation report (dashboard)
+        if: ${{ !cancelled() }}
         run: >
           python build_report.py
           --junit reports/.internal/junit.xml
@@ -64,10 +71,67 @@ jobs:
 
       # 5. Presentation-grade strategy deck (self-contained HTML)
       - name: Build strategy document
+        if: ${{ !cancelled() }}
         run: >
           python build_strategy_doc.py
           --junit reports/.internal/junit.xml
           --html docs/automation_strategy.html
+
+      # 6. Verdict + KPIs on the run page itself (no need to download anything)
+      - name: Write job summary
+        if: ${{ !cancelled() }}
+        run: |
+          python - <<'PY'
+          import os
+          from src.reporting import report_builder as RB
+
+          summary, _ = RB.parse_junit("reports/.internal/junit.xml")
+          unit, _ = RB.parse_junit("reports/.internal/junit_unit.xml",
+                                   include_unit=True)
+          eval_rep = RB.load_eval()
+          label, _, why = RB.verdict_of(summary, eval_rep)
+          agg = (eval_rep or {}).get("aggregate", {})
+          checks = (eval_rep or {}).get("checks", {})
+          gates_ok = sum(1 for v in checks.values() if v)
+
+          md = [
+              f"## Automation report - {label}",
+              "",
+              why,
+              "",
+              "| Metric | Value |",
+              "|---|---|",
+              f"| Automation tests | {summary['total']} |",
+              f"| Passed | {summary['passed']} |",
+              f"| Failed | {summary['failed']} |",
+              f"| Skipped | {summary['skipped']} |",
+              f"| Pass rate | {summary['pass_rate']}% |",
+              f"| Duration | {summary['duration_s']}s |",
+              f"| Unit tests (excluded from report) | {unit['total']} |",
+          ]
+          if agg:
+              md += [
+                  f"| Recall@5 | {agg.get('recall@5', '-')} |",
+                  f"| Faithfulness | {agg.get('faithfulness', '-')} |",
+                  f"| Answer relevance | {agg.get('answer_relevance', '-')} |",
+                  f"| Hallucination | {agg.get('hallucination', '-')} |",
+                  f"| p95 latency | {agg.get('p95_latency_s', '-')}s |",
+              ]
+          if checks:
+              md += ["", f"**RAG release gates:** {gates_ok}/{len(checks)} green"]
+          md += [
+              "",
+              "Reports (artifact `automation-reports`):",
+              "",
+              "- `reports/automation_dashboard.html` - visual dashboard (open this)",
+              "- `reports/automation_report.html` - pytest-html per-test detail",
+              "- `reports/cucumber.json` - Cucumber JSON for CI dashboards",
+              "- `docs/automation_strategy.html` - strategy deck",
+          ]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("\n".join(md) + "\n")
+          print("\n".join(md))
+          PY
 
       - name: Upload reports
         if: always()
@@ -79,3 +143,4 @@ jobs:
             data/eval/evaluation_report.json
             docs/automation_strategy.html
           retention-days: 30
+          if-no-files-found: warn
