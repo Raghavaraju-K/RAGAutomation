@@ -1,4 +1,5 @@
 # UK Credit Memo AI — Local RAG (FCA/PRA aligned)
+[![rag-gate](https://github.com/Raghavaraju-K/RAGAutomation/actions/workflows/rag-gate.yml/badge.svg)](https://github.com/Raghavaraju-K/RAGAutomation/actions/workflows/rag-gate.yml)
 
 > **RAG application with automation coverage** — a local UK credit-memo RAG app together with its
 > full test strategy, visual reports and CI gate.

@@ -33,6 +33,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # reports/ is gitignored (except .gitkeep) - recreate the report dirs the tools write to
+      - name: Prepare report directories
+        run: mkdir -p reports/.internal
+
       # 1. 100-question RAG evaluation -> data/eval/evaluation_report.json (gates read it)
       - name: Run RAG evaluation (100 golden questions)
         run: python run_eval.py
