@@ -1,0 +1,5 @@
+GUARANTEES AND SUPPORT ANALYSIS (UK)
+Corporate guarantee from parent required if subsidiary leverage above 4.0x, executed as a deed under English law. Personal guarantee from owners above 20 percent ownership for private companies under 50MM pounds turnover, with independent legal advice evidenced.
+Guarantor analysis: review guarantor financials, compute adjusted net worth excluding illiquid assets, liquidity ratio, contingent liabilities including HMRC time-to-pay.
+Springing guarantee triggers if DSCR falls below 1.10x. Limited guarantee capped at 50 percent of loan if guarantor net worth below 1.0x loan amount.
+Letter of comfort is NOT a guarantee and cannot be counted as tertiary repayment source. Debenture and guarantees must be registered at Companies House within 21 days.

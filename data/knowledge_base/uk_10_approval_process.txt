@@ -1,0 +1,5 @@
+CREDIT APPROVAL PROCESS AND MEMO WRITING (UK)
+UK Approval chain: Relationship Manager drafts memo, Credit Officer reviews, Senior Approver (SMCR) approves up to 5MM pounds, Credit Committee approves 5MM to 25MM pounds, Board Risk Committee above 25MM pounds.
+UK Memo quality standards: every number cited needs source (audited FS page, RICS valuation, Companies House filing). No unsupported projections. Base case and downside case required with Bank of England scenarios. Consumer Duty fair value and outcome statement mandatory.
+Downside case must show break-even EBITDA and covenant headroom. Sensitivity table: plus or minus 10 percent revenue and plus or minus 100 bps SONIA rate.
+Post-approval: register charges at Companies House within 21 days, book loan within 90 days, first monitoring review in 90 days, annual review every 12 months.

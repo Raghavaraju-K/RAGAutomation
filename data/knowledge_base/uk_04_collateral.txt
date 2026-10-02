@@ -1,0 +1,6 @@
+COLLATERAL ANALYSIS AND MARGINING (UK)
+Eligible collateral under English-law debenture: trade receivables under 90 days (advance rate 80 percent), finished goods inventory (advance rate 50 percent), raw materials (advance rate 40 percent), freehold commercial real estate (loan to value max 75 percent), equipment (loan to value max 60 percent).
+Ineligible receivables: intercompany, contra accounts, Crown and government receivables without assignment, receivables over 90 days past due.
+Borrowing base equals eligible receivables times 0.80 plus eligible inventory times 0.50. Utilisation must not exceed borrowing base.
+Valuation required: RICS Red Book valuation every 3 years for real estate, machinery and equipment valuation every 3 years. Site review annually for asset-based loans over 5MM pounds. Charges must be registered at Companies House within 21 days.
+Collateral coverage ratio equals collateral value divided by loan amount. Minimum 1.25x for secured loans.

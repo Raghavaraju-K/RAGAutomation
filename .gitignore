@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Test / tool caches
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Generated run artifacts (rebuilt by run_automation.py / CI)
+reports/*
+!reports/.gitkeep
+
+# Generated TF-IDF index (rebuilt from data/knowledge_base/)
+data/index/
+
+# Generated evaluation report (rebuilt by run_eval.py)
+data/eval/evaluation_report.json
+
+# User memos are NEVER committed / NEVER indexed - keep the shared test fixtures only
+data/memos/*
+!data/memos/_sample_memo.pdf
+!data/memos/_sample_memo.png
+
+# Local secrets / OS noise
+.env
+*.log
+Thumbs.db
+.DS_Store

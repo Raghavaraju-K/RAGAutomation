@@ -1,0 +1,19 @@
+python-dateutil
+pandas
+numpy
+streamlit
+pytest
+pyyaml
+pypdf
+pypdfium2
+pillow
+# Optional: only needed for scanned PDFs / JPG/JPEG/PNG OCR:
+# 1) install Tesseract OCR app: https://github.com/UB-Mannheim/tesseract/wiki
+# 2) pip install pytesseract
+pytesseract
+# Automation: BDD (Gherkin/Cucumber-style) + HTML reports
+pytest-bdd
+pytest-html
+reportlab
+
+

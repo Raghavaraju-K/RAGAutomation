@@ -1,0 +1,6 @@
+COVENANTS AND CONDITIONS PRECEDENT (UK)
+Affirmative covenants: timely financial statements within 90 days year-end and 45 days quarter-end, maintain insurance, pay HMRC taxes and VAT on time, allow field exams.
+Financial covenants: minimum DSCR 1.20x tested quarterly on post-tax cash flow after HMRC liabilities, maximum leverage 3.5x, minimum current ratio 1.20x, minimum tangible net worth 5MM pounds, capex limit 1MM pounds per year without consent.
+Negative covenants: no additional debt above 500k pounds, no dividends if DSCR below 1.25x, no asset sales above 200k pounds without consent, no change of control.
+UK Conditions precedent: executed loan agreement under English law, perfected debenture with fixed and floating charges registered at Companies House within 21 days, legal opinion, background check, MLR 2017 KYC and AML clearance with OFSI sanctions screening, appraisal on file, Consumer Duty fair value assessment.
+Events of default: payment default, covenant breach, cross-default over 100k pounds, material adverse change, insolvency or administration under the Insolvency Act 1986.

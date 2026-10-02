@@ -1,0 +1,6 @@
+CASH FLOW AND REPAYMENT SOURCES (UK)
+Primary repayment source is operating cash flow after HMRC and VAT. Secondary source is collateral realisation under debenture. Tertiary source is guarantor support.
+Free Cash Flow equals Operating Cash Flow minus Maintenance Capex minus Dividends. Must be positive for term loan approval.
+Revolving credit repayment depends on working capital cycle: receivables days plus inventory days minus payables days. Cash conversion cycle above 90 days needs larger revolver headroom.
+Stress test: 20 percent EBITDA decline must still keep DSCR above 1.0x, and Bank of England base rate plus 3 percent must still be affordable. If not, reduce tenor or require amortisation.
+Seasonal borrowers need peak-trough analysis with monthly management accounts.

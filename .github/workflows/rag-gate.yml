@@ -1,0 +1,77 @@
+name: rag-gate
+
+# Runs the automation gate after EVERY code commit (any branch push),
+# on every pull request, and on demand (workflow_dispatch).
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: rag-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  automation:
+    name: RAG eval + automation suite + reports
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install Tesseract OCR (image memo extraction)
+        run: sudo apt-get update && sudo apt-get install -y tesseract-ocr
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # 1. 100-question RAG evaluation -> data/eval/evaluation_report.json (gates read it)
+      - name: Run RAG evaluation (100 golden questions)
+        run: python run_eval.py
+
+      # 2. Developer-owned unit tests (separate step so failures are clearly attributed)
+      - name: Run unit tests
+        run: pytest -q -m unit --junitxml reports/.internal/junit_unit.xml
+
+      # 3. Automation suite - the scope of the reports below (unit tests excluded)
+      - name: Run automation suite
+        run: >
+          pytest -q -m "not unit"
+          --html reports/automation_report.html
+          --self-contained-html
+          --cucumberjson reports/cucumber.json
+          --junitxml reports/.internal/junit.xml
+
+      # 4. Visual dashboard from the JUnit feed + eval report
+      - name: Build automation dashboard
+        run: >
+          python build_report.py
+          --junit reports/.internal/junit.xml
+          --html reports/automation_dashboard.html
+          --run-ts ci
+
+      # 5. Presentation-grade strategy deck (self-contained HTML)
+      - name: Build strategy document
+        run: >
+          python build_strategy_doc.py
+          --junit reports/.internal/junit.xml
+          --html docs/automation_strategy.html
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automation-reports
+          path: |
+            reports/
+            data/eval/evaluation_report.json
+            docs/automation_strategy.html
+          retention-days: 30

@@ -1,0 +1,7 @@
+FINANCIAL STATEMENT SPREADING AND ANALYSIS (UK)
+Spread 3 years of audited financials under UK GAAP or IFRS plus interim management accounts. Normalise for non-recurring items: asset sales, goodwill impairment, restructuring charges.
+Key ratios: Current Ratio equals Current Assets divided by Current Liabilities. Minimum 1.20x for working capital borrowers.
+Leverage: Debt to EBITDA must be below 3.5x for senior unsecured, below 4.5x for leveraged borrowers with sponsor support.
+Debt Service Coverage Ratio (DSCR) equals EBITDA divided by Interest plus Current Portion Long Term Debt, tested on post-tax cash flow after HMRC and VAT. Minimum DSCR is 1.20x. Below 1.10x requires decline or restructuring.
+EBITDA margin below 10 percent signals weak profitability for manufacturing borrowers.
+Trend: declining revenue for two consecutive years is a negative flag requiring explanation in the risk section with Companies House filing cross-check.

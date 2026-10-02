@@ -1,0 +1,6 @@
+CREDIT POLICY AND EXCEPTIONS
+Policy tenors: working capital revolver up to 3 years, equipment term up to 7 years, commercial real estate up to 10 years with 25-year amortization.
+Single obligor limit: 15 percent of bank capital. Aggregate industry limit: 25 percent for commercial real estate.
+Policy exceptions require dual approval by Chief Credit Officer and business head. Exceptions tracked: tenor exception, LTV exception, leverage exception, DSCR exception, collateral exception.
+Pricing floor: SONIA plus 200 bps for rated 1-4, SONIA plus 300 bps for rated 5-6, SONIA plus 450 bps for rated 7. Origination fee minimum 50 bps. All amounts in pounds sterling.
+Regulatory: loans above 5MM pounds need Credit Committee approval under SMCR with Responsible Senior Manager sign-off. Insider and connected-party loans need Board approval with FCA conflicts disclosure.

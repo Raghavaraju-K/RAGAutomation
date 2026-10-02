@@ -1,0 +1,5 @@
+CREDIT MEMORANDUM OVERVIEW (UK)
+A UK credit memorandum (credit memo) is the formal document a lender uses to request credit approval under FCA and PRA standards.
+UK Sections: Executive Summary, Borrower Background (with Companies House number), Purpose of Facility, Financial Analysis, Repayment Sources, Collateral Analysis (debenture, fixed and floating charges), Risk Assessment and Mitigants, IFRS 9 Stage and Provisions, Consumer Duty and Fair Value Assessment, Covenants and Conditions, Recommendation.
+The executive summary states borrower name, facility amount in pounds sterling, facility type (term loan, revolving credit, overdraft, buy-to-let mortgage), tenor, SONIA-based pricing, purpose, and recommendation (approve or decline).
+The recommendation must be supported by affordability and cash flow coverage, collateral coverage, covenant compliance, and Consumer Duty good outcomes.

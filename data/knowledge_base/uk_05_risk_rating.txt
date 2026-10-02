@@ -1,0 +1,5 @@
+RISK RATING AND IFRS 9 STAGING (UK)
+Internal risk ratings 1 to 10 mapped to IFRS 9 stages. Rating 1-4 is investment grade equivalent (PD below 0.5 percent, Stage 1). Rating 5-6 is pass and watch (PD 0.5-2 percent, Stage 1 or Stage 2 on SICR). Rating 7 is special mention (Stage 2). Rating 8 is substandard, Rating 9 is doubtful, Rating 10 is loss (Stage 3).
+Upgrade requires two consecutive quarters of covenant compliance and DSCR above 1.25x.
+Downgrade and SICR triggers: payment default over 30 days, covenant breach uncured for 30 days, DSCR below 1.0x, auditor going-concern qualification, PD doubling.
+Expected Credit Loss equals PD times LGD times EAD, discounted. LGD for secured is 20-30 percent, unsecured 45-60 percent. State IFRS 9 stage and coverage ratio in every memo.

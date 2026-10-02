@@ -1,0 +1,4 @@
+IFRS 9 EXPECTED CREDIT LOSS AND UK PROVISIONS
+UK banks report under IFRS 9. Expected Credit Loss (ECL) equals PD times LGD times EAD, discounted. Stage 1: 12-month ECL for performing loans. Stage 2: lifetime ECL on significant increase in credit risk (SICR), for example 30 days past due or PD doubling. Stage 3: credit-impaired (90 days past due, unlikely to pay).
+PRA thematic feedback 2023 to 2024 requires robust SICR triggers, forward-looking scenarios (Bank of England stress: base, upside, downside weighted), and post-model adjustments governed and documented.
+Provisions in the credit memo must state IFRS 9 stage, coverage ratio (ECL divided by gross exposure), and cost of risk in bps. Forbearance flags: payment holiday, term extension, covenant waiver. Forborne exposures stay in Stage 2 for a 2-year probation before cure to Stage 1.

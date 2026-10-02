@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Automation Strategy - UK Credit Memo AI</title>
+<style>
+:root{
+  --bg:#060912;--card:rgba(18,27,47,.74);--card2:rgba(11,18,33,.72);--line:#233254;
+  --txt:#eaf0ff;--muted:#94a6c6;--green:#34d399;--red:#fb7185;--amber:#fbbf24;
+  --blue:#60a5fa;--violet:#a78bfa;--cyan:#22d3ee;--pink:#f472b6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);line-height:1.5;overflow-x:hidden;
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(58rem 40rem at 10% -10%,rgba(96,165,250,.22),transparent 60%),
+    radial-gradient(48rem 36rem at 95% 0%,rgba(167,139,250,.20),transparent 62%),
+    radial-gradient(52rem 40rem at 60% 110%,rgba(34,211,238,.16),transparent 60%),
+    radial-gradient(40rem 30rem at 85% 70%,rgba(244,114,182,.10),transparent 60%);
+  animation:aurora 18s ease-in-out infinite alternate}
+@keyframes aurora{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(0,-18px,0) scale(1.03)}}
+.deck{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:30px 22px 70px}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:.2px}
+code{font-family:Consolas,Monaco,monospace;font-size:12.4px;color:#d5e5ff;
+  background:rgba(8,14,26,.85);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.muted{color:var(--muted)}.small{font-size:12.5px}
+
+/* ---------- sticky nav ---------- */
+.nav{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px;
+  padding:12px 14px;margin-bottom:20px;border-radius:16px;
+  background:rgba(9,15,28,.82);border:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav a{color:#c7d6f2;text-decoration:none;font-size:12.5px;font-weight:600;
+  padding:6px 12px;border-radius:20px;border:1px solid transparent;transition:.18s}
+.nav a:hover{color:#fff;background:rgba(96,165,250,.16);border-color:rgba(96,165,250,.4)}
+.nav .spacer{flex:1}
+.nav button{cursor:pointer;font:inherit;font-size:12.5px;font-weight:700;color:#04121f;
+  background:linear-gradient(135deg,#22d3ee,#60a5fa);border:0;border-radius:20px;padding:7px 14px}
+.nav button:hover{filter:brightness(1.08)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:40px 40px 34px;
+  background:linear-gradient(140deg,rgba(30,46,84,.95),rgba(10,16,30,.94));
+  border:1px solid var(--line);box-shadow:0 30px 80px rgba(2,6,20,.6)}
+.hero::after{content:"";position:absolute;inset:-2px;border-radius:26px;pointer-events:none;
+  background:linear-gradient(120deg,rgba(34,211,238,.5),rgba(167,139,250,.4),rgba(96,165,250,.4));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;padding:1.2px}
+.eyebrow{display:inline-block;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--cyan);font-weight:800;margin-bottom:12px}
+.hero h1{font-size:44px;line-height:1.05;letter-spacing:-.5px;
+  background:linear-gradient(92deg,#ffffff,#b8d0ff 50%,#7ef0e0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .lede{color:#c2d2ee;font-size:15.5px;max-width:760px;margin-top:14px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;
+  padding:6px 13px;border-radius:20px;background:rgba(9,15,28,.7);border:1px solid var(--line);
+  color:#cadcf7}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.badge.pass{color:#6ee7b7;border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.12)}
+.badge.fail{color:#fda4af;border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.12)}
+.hero-byline{margin-top:20px;color:var(--muted);font-size:12.5px}
+
+/* ---------- KPI strip ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:16px;margin:22px 0}
+.kpi{position:relative;overflow:hidden;padding:18px 18px 16px;border-radius:18px;
+  background:var(--card);border:1px solid var(--line);backdrop-filter:blur(10px);transition:.2s}
+.kpi:hover{transform:translateY(-4px);box-shadow:0 20px 46px rgba(2,6,20,.55)}
+.kpi .bar{position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--cyan),var(--violet))}
+.kpi .v{font-size:32px;font-weight:900;line-height:1}
+.kpi .l{font-size:12px;color:#c7d6f2;font-weight:600;margin-top:4px}
+.kpi .s{font-size:11px;color:var(--muted)}
+.kpi.g .v{color:var(--green)}.kpi.b .v{color:var(--red)}.kpi.c .v{color:var(--cyan)}
+.kpi.v2 .v{color:var(--violet)}.kpi.a .v{color:var(--amber)}
+
+/* ---------- sections ---------- */
+.section{margin-top:34px;scroll-margin-top:80px}
+.sec-head{display:flex;align-items:center;gap:13px;margin-bottom:16px}
+.sec-num{flex:0 0 auto;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  font-size:15px;font-weight:900;color:#04121f;
+  background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 8px 22px rgba(34,211,238,.3)}
+.sec-head h2{font-size:22px}
+.sec-head .sub{color:var(--muted);font-size:13px;margin-top:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 24px;
+  backdrop-filter:blur(10px);box-shadow:0 18px 46px rgba(2,6,20,.42)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+.card h3{font-size:15px;color:#dbe7ff;margin-bottom:10px}
+.card p{color:#bccde9;font-size:13.6px;margin:6px 0}
+.card ul{margin:8px 0 0;padding-left:18px;color:#bccde9;font-size:13.4px}
+.lead{color:#c9d8f2;font-size:14.5px;line-height:1.6}
+.empty{padding:20px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);
+  text-align:center;font-size:13.5px}
+
+/* ---------- gates (rings) ---------- */
+.rings{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.ring-box{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px;
+  border-radius:18px;background:var(--card2);border:1px solid var(--line)}
+.ring{width:132px;height:132px}
+.ring circle{transition:stroke-dasharray 1s cubic-bezier(.3,1,.4,1)}
+.ring-val{font-size:23px;font-weight:900;fill:#f3f8ff}
+.ring-sub{font-size:9.5px;fill:#8ea3c6}
+.ring-label{font-size:12.5px;font-weight:700;color:#d6e2fa;text-align:center}
+.chip{font-size:10px;font-weight:900;letter-spacing:1.2px;padding:3px 11px;border-radius:20px}
+.chip-pass{background:rgba(52,211,153,.18);color:#6ee7b7}
+.chip-fail{background:rgba(251,113,133,.18);color:#fda4af}
+
+/* ---------- areas ---------- */
+.areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:12px}
+.area{position:relative;padding:13px 14px 15px;border-radius:14px;
+  background:var(--card2);border:1px solid var(--line)}
+.area-top{display:flex;justify-content:space-between;gap:8px;font-size:12.6px;margin-bottom:8px}
+.area-name{color:#d6e2fa;font-weight:600}
+.area-count{color:var(--muted);font-weight:700}
+.area-track{height:9px;border-radius:6px;background:rgba(148,163,184,.14);overflow:hidden}
+.area-fill{display:block;height:100%;border-radius:6px}
+.area-fill.ok{background:linear-gradient(90deg,#10b981,#34d399)}
+.area-fill.bad{background:linear-gradient(90deg,#e11d48,#fb7185)}
+.area-chip{position:absolute;top:11px;right:12px;font-size:10px;font-weight:900;
+  padding:1px 8px;border-radius:20px}
+.area-chip.ok{background:rgba(52,211,153,.16);color:#6ee7b7}
+.area-chip.bad{background:rgba(251,113,133,.16);color:#fda4af}
+
+/* ---------- test type cards ---------- */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.type-card{position:relative;padding:20px;border-radius:18px;background:var(--card);
+  border:1px solid var(--line);transition:.2s;overflow:hidden}
+.type-card::before{content:"";position:absolute;inset:0;opacity:0;transition:.25s;
+  background:radial-gradient(24rem 12rem at 20% -20%,rgba(96,165,250,.16),transparent 70%)}
+.type-card:hover{transform:translateY(-4px);box-shadow:0 22px 50px rgba(2,6,20,.55)}
+.type-card:hover::before{opacity:1}
+.type-ic{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+  background:rgba(96,165,250,.14);color:#8ec5ff;margin-bottom:12px}
+.type-ic .ic{width:22px;height:22px}
+.type-card h4{font-size:14.6px;color:#e6eeff;margin-bottom:6px}
+.type-card p{color:#b4c6e4;font-size:13px;margin:0}
+.type-where{margin-top:12px;font-family:Consolas,Monaco,monospace;font-size:11.2px;
+  color:#7fe3d6;word-break:break-word}
+
+/* ---------- matrix table ---------- */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px}
+table.matrix{border-collapse:collapse;width:100%;font-size:12.8px;min-width:840px}
+table.matrix thead th{position:sticky;top:0;background:#111c33;text-align:left;padding:12px 14px;
+  color:#a9c0e6;font-size:11px;letter-spacing:1.1px;text-transform:uppercase;
+  border-bottom:1px solid var(--line)}
+table.matrix tbody td{padding:12px 14px;border-bottom:1px solid rgba(35,50,84,.6);
+  color:#c3d3ef;vertical-align:top;line-height:1.5}
+table.matrix tbody tr:hover{background:rgba(96,165,250,.07)}
+th.cov-area{text-align:left;padding:12px 14px;font-size:12.8px;color:#e2ebff;
+  white-space:nowrap;border-bottom:1px solid rgba(35,50,84,.6)}
+.cov-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;
+  vertical-align:middle}
+.cov-dot.pos{background:var(--green);box-shadow:0 0 10px rgba(52,211,153,.65)}
+.cov-dot.neg{background:var(--red);box-shadow:0 0 10px rgba(251,113,133,.65)}
+.cov-dot.edge{background:var(--amber);box-shadow:0 0 10px rgba(251,191,36,.65)}
+
+/* ---------- patterns ---------- */
+.pat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:12px}
+.pat{display:flex;gap:12px;align-items:flex-start;padding:14px 15px;border-radius:14px;
+  background:var(--card2);border:1px solid var(--line)}
+.pat-ic{flex:0 0 26px;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;
+  background:rgba(52,211,153,.14);color:#6ee7b7}
+.pat-ic .ic{width:15px;height:15px}
+.pat b{display:block;font-size:13.4px;color:#e6eeff}
+.pat span{font-size:12.4px;color:#a9bde0}
+
+/* ---------- pipeline ---------- */
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+@media(max-width:900px){.pipeline{grid-template-columns:1fr 1fr}}
+.step{position:relative;padding:18px 16px;border-radius:16px;background:var(--card2);
+  border:1px solid var(--line);text-align:center}
+.step-n{width:32px;height:32px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;
+  font-weight:900;color:#04121f;background:linear-gradient(135deg,var(--cyan),var(--violet))}
+.step h4{font-size:14px;color:#e6eeff}
+.step p{font-size:12.4px;color:#a9bde0;margin:6px 0 0}
+.pipeline-cmd{margin-top:14px;text-align:center;font-family:Consolas,Monaco,monospace;
+  font-size:12.8px;color:#7fe3d6;background:rgba(8,14,26,.8);border:1px dashed var(--line);
+  border-radius:12px;padding:12px}
+
+/* ---------- artifacts / history ---------- */
+.artifacts{list-style:none;margin:0;padding:0}
+.artifacts li{display:flex;gap:12px;align-items:baseline;padding:11px 0;
+  border-bottom:1px dashed rgba(35,50,84,.75);font-size:13px}
+.artifacts li:last-child{border-bottom:0}
+.artifacts span{color:var(--muted);font-size:12.5px}
+.hist-strip{display:flex;flex-wrap:wrap;gap:10px}
+.hist{font-size:12.4px;padding:8px 13px;border-radius:12px;border:1px solid var(--line);
+  background:var(--card2);color:#c7d6f2}
+.hist b{color:#eaf0ff;font-size:14px}
+.hist.pass{border-color:rgba(52,211,153,.4)}
+.hist.fail{border-color:rgba(251,113,133,.4)}
+
+/* ---------- footer + print ---------- */
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);text-align:center;
+  color:var(--muted);font-size:12px;line-height:1.9}
+.foot b{color:#cddbf5}
+@media print{
+  body{background:#fff;color:#111}
+  body::before,.nav{display:none!important}
+  .deck{max-width:100%;padding:0}
+  .hero,.card,.type-card,.kpi,.ring-box,.area,.pat,.step,.table-wrap
+    {background:#fff!important;border:1px solid #d5dced!important;box-shadow:none!important}
+  .hero h1{-webkit-text-fill-color:#0f172a;background:none;color:#0f172a}
+  .eyebrow,.sec-head .sub,.muted,.card p,.card ul,.pat span,.step p,.type-card p
+    {color:#475569!important}
+  h1,h2,h3,h4,.kpi .v,.ring-val,.type-card h4,.pat b,.step h4,.area-name,th.cov-area
+    {color:#0f172a!important}
+  .section,.card,.type-card,.ring-box,.area,.pat,.step,.kpi{break-inside:avoid;page-break-inside:avoid}
+  .section{page-break-before:auto}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <nav class="nav">
+    <a href="#purpose">1 Purpose</a>
+    <a href="#gates">2 Gates</a>
+    <a href="#types">3 Test Types</a>
+    <a href="#coverage">4 Coverage</a>
+    <a href="#eval">5 Evaluation</a>
+    <a href="#patterns">6 AI Patterns</a>
+    <a href="#run">7 Execution</a>
+    <a href="#areas">8 Areas</a>
+    <a href="#reports">9 Reports</a>
+    <a href="#criteria">10 Criteria</a>
+    <span class="spacer"></span>
+    <button id="btn-print" type="button">Print / Save PDF</button>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Automation Strategy &middot; QA Engineering</div>
+    <h1>Automated Quality Assurance for the<br/>UK Credit Memo RAG Platform</h1>
+    <p class="lede">A deterministic, offline automation programme that proves the RAG app retrieves
+      the right UK standards, answers with grounded citations, extracts memos from every supported
+      format, scores them against an 8-point UK checklist, renders a working UI, and stays inside
+      quality gates on every run.</p>
+    <div class="hero-meta">
+      <span class="badge pass"><span class="dot"></span>Release verdict: PASS</span>
+      <span class="badge"><span class="dot"></span>85 automation test cases</span>
+      <span class="badge"><span class="dot"></span>Gates passed: 5/5</span>
+      <span class="badge"><span class="dot"></span>Offline &amp; deterministic (no LLM, no keys)</span>
+    </div>
+    <div class="hero-byline">Prepared by <b>Automation QA</b> &middot; generated 02 Oct 2026 11:36 &middot;
+      latest run 02 Oct 2026, 10:18 (4 runs recorded)</div>
+  </header>
+
+  <section class="kpis">
+    <div class="kpi g"><span class="bar"></span><div class="v">85</div>
+      <div class="l">Automation test cases</div><div class="s">100% pass rate</div></div>
+    <div class="kpi c"><span class="bar"></span><div class="v">5/5</div>
+      <div class="l">Release gates passed</div><div class="s">Recall, Faith, Rel, Hall, p95</div></div>
+    <div class="kpi v2"><span class="bar"></span><div class="v">100</div>
+      <div class="l">Golden evaluation questions</div><div class="s">UK standards dataset</div></div>
+    <div class="kpi b"><span class="bar"></span><div class="v">0</div>
+      <div class="l">Unit tests excluded</div><div class="s">developer-owned, not in report</div></div>
+    <div class="kpi a"><span class="bar"></span><div class="v">0.001s</div>
+      <div class="l">p95 latency</div><div class="s">target &le; 3.0s</div></div>
+  </section>
+
+  <section id="purpose" class="section">
+    <div class="sec-head"><div class="sec-num">1</div>
+      <div><h2>Purpose &amp; Scope</h2>
+        <div class="sub">What this programme proves, and what it deliberately leaves out</div></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Purpose</h3>
+        <p class="lead">Give the business a trustworthy, repeatable signal that the UK Credit Memo
+          AI behaves correctly &mdash; grounded, cited, fast and safe &mdash; before every release.</p>
+        <ul>
+          <li>Correct retrieval of UK standards for real credit questions.</li>
+          <li>Answers grounded in retrieved context, with UK citations.</li>
+          <li>Robust extraction across PDF, image and text memos.</li>
+          <li>Consistent UK-readiness scoring with evidence.</li>
+          <li>Working UI and enforced release gates.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Scope</h3>
+        <p><b>In scope (automation report):</b> functional, BDD, UI automation, integration/E2E,
+          regression, release gates and AI-specific checks &mdash; 85 cases.</p>
+        <p><b>Out of scope (kept in the codebase):</b> developer-owned <b>unit tests</b>
+          (<code>test_units.py</code>, <code>unit</code> marker). They run with
+          <code>pytest -q</code> but are excluded from the automation report via
+          <code>-m &quot;not unit&quot;</code>.</p>
+        <p class="muted small">This keeps the report meaningful for automation testers and respects
+          the developers' ownership of unit tests.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gates" class="section">
+    <div class="sec-head"><div class="sec-num">2</div>
+      <div><h2>Quality Goals &amp; Release Gates</h2>
+        <div class="sub">Every gate is enforced as a failing test - a red gate blocks the release</div></div>
+    </div>
+    <div class="card">
+      <div class="rings"><div class="ring-box"><svg class="ring" viewBox="0 0 132 132" role="img" aria-label="Recall@5"><circle cx="66" cy="66" r="60.5" fill="none" stroke="rgba(148,163,184,.18)" stroke-width="11"/><circle cx="66" cy="66" r="60.5" fill="none" stroke="#34d399" stroke-width="11" stroke-linecap="round" stroke-dasharray="376.331 380.133" transform="rotate(-90 66 66)"/><text x="66" y="69" text-anchor="middle" class="ring-val">0.99</text><text x="66" y="88" text-anchor="middle" class="ring-sub">target &amp;ge; 0.90</text></svg><div class="ring-label">Recall@5</div><span class="chip chip-pass">PASS</span></div><div class="ring-box"><svg class="ring" viewBox="0 0 132 132" role="img" aria-label="Faithfulness"><circle cx="66" cy="66" r="60.5" fill="none" stroke="rgba(148,163,184,.18)" stroke-width="11"/><circle cx="66" cy="66" r="60.5" fill="none" stroke="#34d399" stroke-width="11" stroke-linecap="round" stroke-dasharray="380.133 380.133" transform="rotate(-90 66 66)"/><text x="66" y="69" text-anchor="middle" class="ring-val">1.00</text><text x="66" y="88" text-anchor="middle" class="ring-sub">target &amp;ge; 0.90</text></svg><div class="ring-label">Faithfulness</div><span class="chip chip-pass">PASS</span></div><div class="ring-box"><svg class="ring" viewBox="0 0 132 132" role="img" aria-label="Answer Relevance"><circle cx="66" cy="66" r="60.5" fill="none" stroke="rgba(148,163,184,.18)" stroke-width="11"/><circle cx="66" cy="66" r="60.5" fill="none" stroke="#34d399" stroke-width="11" stroke-linecap="round" stroke-dasharray="372.243 380.133" transform="rotate(-90 66 66)"/><text x="66" y="69" text-anchor="middle" class="ring-val">0.98</text><text x="66" y="88" text-anchor="middle" class="ring-sub">target &amp;ge; 0.90</text></svg><div class="ring-label">Answer Relevance</div><span class="chip chip-pass">PASS</span></div><div class="ring-box"><svg class="ring" viewBox="0 0 132 132" role="img" aria-label="Hallucination"><circle cx="66" cy="66" r="60.5" fill="none" stroke="rgba(148,163,184,.18)" stroke-width="11"/><circle cx="66" cy="66" r="60.5" fill="none" stroke="#34d399" stroke-width="11" stroke-linecap="round" stroke-dasharray="380.133 380.133" transform="rotate(-90 66 66)"/><text x="66" y="69" text-anchor="middle" class="ring-val">0.00</text><text x="66" y="88" text-anchor="middle" class="ring-sub">target &amp;le; 0.05</text></svg><div class="ring-label">Hallucination</div><span class="chip chip-pass">PASS</span></div><div class="ring-box"><svg class="ring" viewBox="0 0 132 132" role="img" aria-label="p95 Latency"><circle cx="66" cy="66" r="60.5" fill="none" stroke="rgba(148,163,184,.18)" stroke-width="11"/><circle cx="66" cy="66" r="60.5" fill="none" stroke="#34d399" stroke-width="11" stroke-linecap="round" stroke-dasharray="379.952 380.133" transform="rotate(-90 66 66)"/><text x="66" y="69" text-anchor="middle" class="ring-val">0.001s</text><text x="66" y="88" text-anchor="middle" class="ring-sub">target &amp;le; 3.0s</text></svg><div class="ring-label">p95 Latency</div><span class="chip chip-pass">PASS</span></div></div>
+      <div style="margin-top:18px"><div class="small muted" style="margin-bottom:8px">Recent runs</div>
+        <div class="hist-strip"><span class="hist pass"><b>85</b> tests &middot; 100% &middot; latest</span><span class="hist pass"><b>85</b> tests &middot; 100% &middot; -1</span><span class="hist pass"><b>85</b> tests &middot; 100% &middot; -2</span></div></div>
+    </div>
+  </section>
+
+  <section id="types" class="section">
+    <div class="sec-head"><div class="sec-num">3</div>
+      <div><h2>Types of Testing Covered</h2>
+        <div class="sub">Eleven automation disciplines across function, behaviour and AI quality</div></div>
+    </div>
+    <div class="type-grid"><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4z"/></svg></div><h4>Functional - RAG Q&amp;A</h4><p>Grounded answers with UK citations and a latency SLO on every response.</p><div class="type-where">test_automation_rag.py, test_bdd_rag.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v13H7zM14 3v4h4"/></svg></div><h4>Functional - File Extraction</h4><p>PDF / JPG / JPEG / PNG / TXT / MD extraction, with actionable error messages.</p><div class="type-where">test_automation_extract.py, test_bdd_memo.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v3H9zM7 6h10v14H7zM9 11h6M9 15h6"/></svg></div><h4>Functional - Memo Analysis</h4><p>8-point UK checklist scoring, verdict, gaps and UK-cited evidence.</p><div class="type-where">test_automation_analyser.py, test_bdd_memo.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div><h4>BDD Acceptance</h4><p>Business-readable Given / When / Then scenarios across every area.</p><div class="type-where">tests/bdd/features/*.feature</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3zM3 9h18M7 7h.01"/></svg></div><h4>UI Automation</h4><p>Headless Streamlit UI: 5 tabs, uploader, Q box, KB list, gates - no browser.</p><div class="type-where">test_automation_ui.py, test_bdd_ui_eval.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6M8 7l-3 3a4 4 0 0 0 6 6M16 17l3-3a4 4 0 0 0-6-6"/></svg></div><h4>Integration / E2E</h4><p>Multi-component paths: extract -&gt; analyse -&gt; standards evidence.</p><div class="type-where">test_automation_analyser.py, test_bdd_memo.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h4>Data &amp; Regression</h4><p>100-question evaluation with per-question rows for regression diffing.</p><div class="type-where">test_automation_eval.py, runner.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4h14v17M9 9h6M9 13h6M9 17h6"/></svg></div><h4>Release Gates</h4><p>Quality thresholds enforced as failing tests.</p><div class="type-where">test_rag_gates.py, test_bdd_ui_eval.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg></div><h4>AI-Specific Patterns</h4><p>Grounding, hallucination guard, metamorphic, robustness, no-leakage, bias, determinism.</p><div class="type-where">ai_patterns.feature, test_automation_rag.py</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/></svg></div><h4>Negative / Error Handling</h4><p>Unsupported types, blank images, empty input, missing files, gibberish queries.</p><div class="type-where">*_negative* tests + negative marker</div></article><article class="type-card"><div class="type-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a6 6 0 0 1 10-4l3 3M20 15a6 6 0 0 1-10 4l-3-3M17 5v3h-3M7 19v-3h3"/></svg></div><h4>Edge Cases</h4><p>.jpeg vs .jpg, empty question, paraphrase consistency, missing report.</p><div class="type-where">*_edge* tests + edge marker</div></article></div>
+  </section>
+
+  <section id="coverage" class="section">
+    <div class="sec-head"><div class="sec-num">4</div>
+      <div><h2>Coverage Matrix</h2>
+        <div class="sub">Positive, negative and edge checks mapped to every business area</div></div>
+    </div>
+    <div class="table-wrap"><table class="matrix"><thead><tr><th>Area</th><th>Positive checks</th><th>Negative checks</th><th>Edge checks</th></tr></thead><tbody><tr><th class="cov-area">RAG Q&amp;A</th><td class="cov-pos"><span class="cov-dot pos"></span>ICR / SONIA / Stage-2 answered &amp; cited; latency &lt; 3s</td><td class="cov-neg"><span class="cov-dot neg"></span>Gibberish question does not invent an FCA section</td><td class="cov-edge"><span class="cov-dot edge"></span>Empty question safe fallback; paraphrase (metamorphic) consistency</td></tr><tr><th class="cov-area">File Extraction</th><td class="cov-pos"><span class="cov-dot pos"></span>Digital PDF text; JPG OCR; TXT direct</td><td class="cov-neg"><span class="cov-dot neg"></span>.xlsx unsupported-type; blank PNG paste-guidance</td><td class="cov-edge"><span class="cov-dot edge"></span>.jpeg alias; scanned-PDF OCR path</td></tr><tr><th class="cov-area">Memo Analysis</th><td class="cov-pos"><span class="cov-dot pos"></span>Strong memo READY; PDF end-to-end; evidence cites uk_*</td><td class="cov-neg"><span class="cov-dot neg"></span>Weak memo NEEDS WORK + &ge; 3 gaps; empty memo error</td><td class="cov-edge"><span class="cov-dot edge"></span>Missing file error</td></tr><tr><th class="cov-area">Streamlit UI</th><td class="cov-pos"><span class="cov-dot pos"></span>5 tabs render; uploader + paste; Q box + Top-K; UK-only KB list</td><td class="cov-neg"><span class="cov-dot neg"></span>Dashboard still loads with no eval report</td><td class="cov-edge"><span class="cov-dot edge"></span>Zero exceptions on load</td></tr><tr><th class="cov-area">Eval Gates</th><td class="cov-pos"><span class="cov-dot pos"></span>Recall &ge; .90, Faith &ge; .90, Rel &ge; .90, Hall &le; .05, p95 &le; 3s, PASS</td><td class="cov-neg"><span class="cov-dot neg"></span>Gate failures block the release</td><td class="cov-edge"><span class="cov-dot edge"></span>100 per-question rows for regression</td></tr><tr><th class="cov-area">AI Patterns</th><td class="cov-pos"><span class="cov-dot pos"></span>Gold doc in top-5; faithfulness 1.0; determinism</td><td class="cov-neg"><span class="cov-dot neg"></span>No-leakage: user memos never indexed</td><td class="cov-edge"><span class="cov-dot edge"></span>Typo robustness; bias/fairness conduct guidance</td></tr></tbody></table></div>
+  </section>
+
+  <section id="eval" class="section">
+    <div class="sec-head"><div class="sec-num">5</div>
+      <div><h2>Evaluation Checks</h2>
+        <div class="sub">A 100-question golden dataset scored end-to-end, offline and deterministically</div></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>The golden dataset</h3>
+        <p><b>100 UK questions</b> with a gold document and expected keywords each:
+          <b>35</b> core credit &amp; regulatory, <b>35</b> affordability / IFRS 9 / conduct /
+          financial crime, <b>30</b> paraphrases and UK-ised covenants &amp; policy.</p>
+        <p class="muted small">Per-question rows are stored so regressions can be diffed run over run.</p>
+        <h3 style="margin-top:16px">Retrieval &amp; generation metrics</h3>
+        <ul>
+          <li><b>Retrieval:</b> Recall@5, Precision@5, MRR, Hit@5</li>
+          <li><b>Generation:</b> Faithfulness, Hallucination, Answer relevance, Correctness</li>
+          <li><b>Performance:</b> p50 and p95 latency per query</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Latest measured results</h3>
+        <div class="pat-grid" style="grid-template-columns:1fr 1fr">
+          <div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>0.99</b><span>Recall@5</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>1.00</b><span>Faithfulness</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>0.979</b><span>Answer relevance</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>0.00</b><span>Hallucination</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>0.963</b><span>Correctness</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>0.937</b><span>MRR</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>0.198</b><span>Precision@5</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></div><div><b>0.0014s</b><span>p95 latency</span></div></div>
+        </div>
+        <p class="muted small" style="margin-top:14px">Metrics are lexical heuristics (no LLM judge),
+          which keeps them reproducible and free of API keys.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="patterns" class="section">
+    <div class="sec-head"><div class="sec-num">6</div>
+      <div><h2>AI-Specific Testing Patterns</h2>
+        <div class="sub">What makes testing a non-deterministic RAG system meaningful</div></div>
+    </div>
+    <div class="card"><div class="pat-grid"><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Grounding</b><span>Extractive answers keep faithfulness at 1.0</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Retrieval quality</b><span>Recall@5 / Precision / MRR / Hit@K on 100 golden Qs</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Hallucination guard</b><span>Gibberish probe; hallucination = 1 - faithfulness, gate &le; 5%</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Metamorphic</b><span>Paraphrased ICR question returns the same facts</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Robustness</b><span>Typo-laden question still answered</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>No-leakage</b><span>User memos excluded from the UK index</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Bias / fairness</b><span>Vulnerable-customer question gets conduct guidance</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Determinism</b><span>Same question twice returns the same citations</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Latency SLO</b><span>Per-query and p95 latency within budget</span></div></div><div class="pat"><div class="pat-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><b>Golden dataset</b><span>100 pinned UK questions; rows stored for diffing</span></div></div></div></div>
+  </section>
+
+  <section id="run" class="section">
+    <div class="sec-head"><div class="sec-num">7</div>
+      <div><h2>How It Runs</h2>
+        <div class="sub">One command, four stages - locally and in CI</div></div>
+    </div>
+    <div class="card"><div class="pipeline"><div class="step"><div class="step-n">1</div><h4>Evaluate</h4><p>run_eval.py runs the 100-question RAG evaluation</p></div><div class="step"><div class="step-n">2</div><h4>Automate</h4><p>pytest -m &amp;quot;not unit&amp;quot; runs the automation suite</p></div><div class="step"><div class="step-n">3</div><h4>Report</h4><p>build_report.py renders the visual dashboard</p></div><div class="step"><div class="step-n">4</div><h4>Decide</h4><p>PASS / FAIL verdict gates the release</p></div></div><div class="pipeline-cmd">python run_automation.py &nbsp;&rarr;&nbsp; reports/automation_dashboard.html</div></div>
+  </section>
+
+  <section id="areas" class="section">
+    <div class="sec-head"><div class="sec-num">8</div>
+      <div><h2>Automation by Area</h2>
+        <div class="sub">Where the 85 automation cases live, with live pass rates</div></div>
+    </div>
+    <div class="card"><div class="areas"><div class="area"><div class="area-top"><span class="area-name">RAG Q&amp;A</span><span class="area-count">27/27</span></div><div class="area-track"><span class="area-fill ok" style="width:100.0%"></span></div><span class="area-chip ok">100%</span></div><div class="area"><div class="area-top"><span class="area-name">File Extraction</span><span class="area-count">6/6</span></div><div class="area-track"><span class="area-fill ok" style="width:100.0%"></span></div><span class="area-chip ok">100%</span></div><div class="area"><div class="area-top"><span class="area-name">Memo Extraction &amp; Analysis</span><span class="area-count">11/11</span></div><div class="area-track"><span class="area-fill ok" style="width:100.0%"></span></div><span class="area-chip ok">100%</span></div><div class="area"><div class="area-top"><span class="area-name">Memo Analysis</span><span class="area-count">12/12</span></div><div class="area-track"><span class="area-fill ok" style="width:100.0%"></span></div><span class="area-chip ok">100%</span></div><div class="area"><div class="area-top"><span class="area-name">UI Automation</span><span class="area-count">5/5</span></div><div class="area-track"><span class="area-fill ok" style="width:100.0%"></span></div><span class="area-chip ok">100%</span></div><div class="area"><div class="area-top"><span class="area-name">UI &amp; Eval Gates</span><span class="area-count">13/13</span></div><div class="area-track"><span class="area-fill ok" style="width:100.0%"></span></div><span class="area-chip ok">100%</span></div><div class="area"><div class="area-top"><span class="area-name">Eval Gates</span><span class="area-count">11/11</span></div><div class="area-track"><span class="area-fill ok" style="width:100.0%"></span></div><span class="area-chip ok">100%</span></div></div></div>
+  </section>
+
+  <section id="reports" class="section">
+    <div class="sec-head"><div class="sec-num">9</div>
+      <div><h2>Reports Produced</h2>
+        <div class="sub">Visual, machine-readable and audit-friendly outputs on every run</div></div>
+    </div>
+    <div class="card"><ul class="artifacts"><li><code>reports/automation_dashboard.html</code><span>Visual automation report - the one to open</span></li><li><code>reports/history.json</code><span>Rolling history powering the last-3-runs trend</span></li><li><code>reports/automation_report_&lt;ts&gt;.html</code><span>pytest-html per-test detail</span></li><li><code>reports/cucumber_&lt;ts&gt;.json</code><span>Cucumber JSON for CI dashboards</span></li><li><code>data/eval/evaluation_report.json</code><span>100-Q metrics + per-question rows + verdict</span></li></ul></div>
+  </section>
+
+  <section id="criteria" class="section">
+    <div class="sec-head"><div class="sec-num">10</div>
+      <div><h2>Entry / Exit Criteria &amp; Risk</h2>
+        <div class="sub">When the suite may run, and when a release may ship</div></div>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <h3>Entry criteria</h3>
+        <ul>
+          <li>Dependencies installed; Tesseract present for OCR tests.</li>
+          <li>UK knowledge base present (<code>uk_*.txt</code>).</li>
+          <li>Evaluation report generated before the gate tests.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Exit criteria</h3>
+        <ul>
+          <li>All 85 automation cases pass.</li>
+          <li>Evaluation verdict is <b>PASS</b>.</li>
+          <li>Recall &ge; .90, Faith &ge; .90, Rel &ge; .90, Hall &le; .05, p95 &le; 3s.</li>
+          <li>Any failing gate blocks the release.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Key risks &amp; mitigations</h3>
+        <ul>
+          <li><b>OCR missing</b> &rarr; skip guards + actionable errors.</li>
+          <li><b>Lexical metrics</b> &rarr; tuned UK synonyms + conservative gates.</li>
+          <li><b>Paraphrase recall</b> &rarr; paraphrase bank + metamorphic tests.</li>
+          <li><b>Unit leakage</b> &rarr; marker + filter + a test that asserts exclusion.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div><b>Automation Strategy</b> &middot; UK Credit Memo AI (FCA/PRA aligned) &middot;
+      generated 02 Oct 2026 11:36</div>
+    <div>Regenerate with <code>python build_strategy_doc.py</code> &middot;
+      live dashboard at <code>reports/automation_dashboard.html</code></div>
+    <div>Educational demo summarising public UK standards &mdash; not regulated advice.</div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var printBtn = document.getElementById('btn-print');
+  if (printBtn) { printBtn.addEventListener('click', function(){ window.print(); }); }
+  var rings = document.querySelectorAll('.ring');
+  rings.forEach(function(r, i){
+    var arc = r.querySelector('circle:nth-child(2)');
+    if(!arc){return;}
+    var d = arc.getAttribute('stroke-dasharray');
+    if(!d){return;}
+    arc.style.strokeDasharray = '0 ' + d.split(' ')[1];
+    setTimeout(function(){ arc.style.strokeDasharray = d; }, 90 * i + 120);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+UK REGULATORY FRAMEWORK FOR LENDING
+UK lenders follow the FCA Handbook and PRA Rulebook. Consumer credit is governed by CONC. Mortgages are governed by MCOB. Buy-to-let underwriting follows PRA Supervisory Statement SS13/16.
+The Consumer Duty (FCA PRIN 2A, in force July 2023) requires good outcomes: products and services, price and value, consumer understanding, consumer support. Every credit memo must evidence Consumer Duty consideration and fair value assessment.
+Senior Managers and Certification Regime (SMCR) applies: credit approvals need a Responsible Senior Manager. Large exposures follow UK CRR: single obligor limit monitored against Tier 1 capital. Regulated loans above risk appetite need Credit Committee and Board Risk Committee approval.
+Pricing is referenced to SONIA (Sterling Overnight Index Average), not SOFR. Example: SONIA plus 250 bps for strong ratings. All amounts in pounds sterling (GBP, pounds). UCC filings do not apply in the UK; use Companies House charge registration within 21 days and perfected debenture with fixed and floating charges.

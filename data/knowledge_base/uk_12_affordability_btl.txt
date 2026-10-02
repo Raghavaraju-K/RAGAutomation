@@ -1,0 +1,4 @@
+UK AFFORDABILITY AND BUY-TO-LET UNDERWRITING
+UK affordability follows MCOB 11 and CONC 5.2A: verify income and expenditure, use ONS and OBR stressed assumptions. Interest Coverage Ratio (ICR) for buy-to-let: rental income divided by mortgage interest. PRA SS13/16 minimum ICR is 125 percent at a stressed rate of 5.5 percent (or pay rate plus 2 percent, whichever higher) for standard borrowers, 145 percent for higher-rate taxpayers.
+Affordability stress: Bank of England base rate plus 3 percent or reversion rate, whichever higher. Loan to Income (LTI) cap: 4.5x for owner-occupied mortgages; no more than 15 percent of new mortgages above 4.5x LTI per FCA MCOB.
+Debt Service Coverage Ratio (DSCR) for UK SME term loans: minimum 1.20x, same as global, but tested on post-tax cash flow after HMRC liabilities and VAT. Freehold commercial real estate max Loan to Value (LTV) 75 percent, in line with PRA SS2015 for building societies.

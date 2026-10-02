@@ -1,0 +1,894 @@
+[
+ {
+  "id": "q001",
+  "question": "What sections must a UK credit memorandum contain?",
+  "gold_doc": "uk_01_credit_memo_overview.txt",
+  "expected_keywords": [
+   "executive summary",
+   "financial analysis",
+   "collateral",
+   "recommendation"
+  ]
+ },
+ {
+  "id": "q002",
+  "question": "What goes in the executive summary of a UK credit memo?",
+  "gold_doc": "uk_01_credit_memo_overview.txt",
+  "expected_keywords": [
+   "borrower name",
+   "facility amount",
+   "tenor",
+   "pricing"
+  ]
+ },
+ {
+  "id": "q003",
+  "question": "What facility types are listed: term loan, revolving credit, letter of credit?",
+  "gold_doc": "uk_01_credit_memo_overview.txt",
+  "expected_keywords": [
+   "term loan",
+   "revolving credit",
+   "letter of credit"
+  ]
+ },
+ {
+  "id": "q004",
+  "question": "What must support the UK credit recommendation?",
+  "gold_doc": "uk_01_credit_memo_overview.txt",
+  "expected_keywords": [
+   "cash flow coverage",
+   "collateral coverage",
+   "covenant compliance"
+  ]
+ },
+ {
+  "id": "q005",
+  "question": "How many years of audited financials must be spread?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "3 years",
+   "audited"
+  ]
+ },
+ {
+  "id": "q006",
+  "question": "Which one-offs are normalised: asset sales, goodwill impairment, restructuring?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "asset sales",
+   "goodwill impairment",
+   "restructuring"
+  ]
+ },
+ {
+  "id": "q007",
+  "question": "What is the minimum Current Ratio and its formula?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "current assets",
+   "current liabilities",
+   "1.20x"
+  ]
+ },
+ {
+  "id": "q008",
+  "question": "What is the maximum Debt to EBITDA for senior unsecured?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "3.5x"
+  ]
+ },
+ {
+  "id": "q009",
+  "question": "What is the DSCR formula and UK minimum?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "ebitda",
+   "interest",
+   "1.20x"
+  ]
+ },
+ {
+  "id": "q010",
+  "question": "What DSCR level requires decline or restructuring?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "1.10x"
+  ]
+ },
+ {
+  "id": "q011",
+  "question": "What are primary, secondary, tertiary repayment sources?",
+  "gold_doc": "uk_03_cashflow_repayment.txt",
+  "expected_keywords": [
+   "operating cash flow",
+   "collateral liquidation",
+   "guarantor"
+  ]
+ },
+ {
+  "id": "q012",
+  "question": "What is Free Cash Flow: operating cash flow minus capex minus dividends?",
+  "gold_doc": "uk_03_cashflow_repayment.txt",
+  "expected_keywords": [
+   "operating cash flow",
+   "capex",
+   "dividends"
+  ]
+ },
+ {
+  "id": "q013",
+  "question": "What is the cash conversion cycle: receivables plus inventory minus payables?",
+  "gold_doc": "uk_03_cashflow_repayment.txt",
+  "expected_keywords": [
+   "receivables days",
+   "inventory days",
+   "payables days"
+  ]
+ },
+ {
+  "id": "q014",
+  "question": "What is the 20 percent EBITDA stress test for DSCR?",
+  "gold_doc": "uk_03_cashflow_repayment.txt",
+  "expected_keywords": [
+   "20 percent",
+   "1.0x"
+  ]
+ },
+ {
+  "id": "q015",
+  "question": "What is the advance rate for receivables under 90 days?",
+  "gold_doc": "uk_04_collateral.txt",
+  "expected_keywords": [
+   "80 percent"
+  ]
+ },
+ {
+  "id": "q016",
+  "question": "What are advance rates for finished goods and raw materials?",
+  "gold_doc": "uk_04_collateral.txt",
+  "expected_keywords": [
+   "50 percent",
+   "40 percent"
+  ]
+ },
+ {
+  "id": "q017",
+  "question": "What are max LTVs for commercial real estate and equipment?",
+  "gold_doc": "uk_04_collateral.txt",
+  "expected_keywords": [
+   "75 percent",
+   "60 percent"
+  ]
+ },
+ {
+  "id": "q018",
+  "question": "What is the borrowing base: eligible receivables times 0.80 plus inventory times 0.50?",
+  "gold_doc": "uk_04_collateral.txt",
+  "expected_keywords": [
+   "0.80",
+   "0.50"
+  ]
+ },
+ {
+  "id": "q019",
+  "question": "What is minimum collateral coverage for secured loans?",
+  "gold_doc": "uk_04_collateral.txt",
+  "expected_keywords": [
+   "1.25x"
+  ]
+ },
+ {
+  "id": "q020",
+  "question": "What are UK risk ratings 1 to 4 and their PD?",
+  "gold_doc": "uk_05_risk_rating.txt",
+  "expected_keywords": [
+   "investment grade",
+   "0.5 percent"
+  ]
+ },
+ {
+  "id": "q021",
+  "question": "What triggers a downgrade: 30 days default, covenant breach, going-concern?",
+  "gold_doc": "uk_05_risk_rating.txt",
+  "expected_keywords": [
+   "30 days",
+   "going-concern"
+  ]
+ },
+ {
+  "id": "q022",
+  "question": "Which FCA and PRA rulebooks govern UK lending?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "fca handbook",
+   "pra rulebook"
+  ]
+ },
+ {
+  "id": "q023",
+  "question": "Which rules govern consumer credit (CONC) and mortgages (MCOB)?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "conc",
+   "mcob"
+  ]
+ },
+ {
+  "id": "q024",
+  "question": "What buy-to-let underwriting statement is SS13/16?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "ss13/16"
+  ]
+ },
+ {
+  "id": "q025",
+  "question": "What are the four Consumer Duty outcomes under PRIN 2A?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "products and services",
+   "price and value",
+   "consumer understanding",
+   "consumer support"
+  ]
+ },
+ {
+  "id": "q026",
+  "question": "What is SMCR and the Responsible Senior Manager role?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "senior managers",
+   "responsible senior manager"
+  ]
+ },
+ {
+  "id": "q027",
+  "question": "What reference rate replaces SOFR for UK pricing: SONIA?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "sonia"
+  ]
+ },
+ {
+  "id": "q028",
+  "question": "What is SONIA in full?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "sterling overnight index average"
+  ]
+ },
+ {
+  "id": "q029",
+  "question": "In what currency are UK loans priced: pounds sterling?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "pounds sterling"
+  ]
+ },
+ {
+  "id": "q030",
+  "question": "How are UK charges registered at Companies House and within how many days?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "companies house",
+   "21 days"
+  ]
+ },
+ {
+  "id": "q031",
+  "question": "What UK security is a debenture with fixed and floating charges?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "debenture",
+   "fixed and floating"
+  ]
+ },
+ {
+  "id": "q032",
+  "question": "What single obligor framework is UK CRR against Tier 1 capital?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "uk crr",
+   "tier 1"
+  ]
+ },
+ {
+  "id": "q033",
+  "question": "What must every UK credit memo evidence on Consumer Duty and fair value?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "consumer duty",
+   "fair value"
+  ]
+ },
+ {
+  "id": "q034",
+  "question": "What committees approve UK loans above risk appetite?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "credit committee",
+   "board risk committee"
+  ]
+ },
+ {
+  "id": "q035",
+  "question": "What UK enforcement pause is the 60-day Breathing Space?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "breathing space",
+   "60 days"
+  ]
+ },
+ {
+  "id": "q036",
+  "question": "What UK rules govern affordability: MCOB 11 and CONC 5.2A?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "mcob 11",
+   "conc"
+  ]
+ },
+ {
+  "id": "q037",
+  "question": "What is the ICR formula: rental income divided by mortgage interest?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "rental income",
+   "mortgage interest"
+  ]
+ },
+ {
+  "id": "q038",
+  "question": "What is the PRA SS13/16 minimum ICR of 125 percent?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "125 percent",
+   "ss13/16"
+  ]
+ },
+ {
+  "id": "q039",
+  "question": "What stressed rate applies: 5.5 percent or pay rate plus 2 percent?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "5.5 percent",
+   "2 percent"
+  ]
+ },
+ {
+  "id": "q040",
+  "question": "What ICR applies to higher-rate taxpayers: 145 percent?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "145 percent"
+  ]
+ },
+ {
+  "id": "q041",
+  "question": "What affordability stress: base rate plus 3 percent or reversion rate?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "3 percent",
+   "reversion rate"
+  ]
+ },
+ {
+  "id": "q042",
+  "question": "What is the LTI cap of 4.5x for owner-occupied mortgages?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "4.5x"
+  ]
+ },
+ {
+  "id": "q043",
+  "question": "What share of new mortgages may exceed 4.5x LTI: 15 percent?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "15 percent"
+  ]
+ },
+ {
+  "id": "q044",
+  "question": "What post-tax DSCR minimum applies after HMRC and VAT?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "1.20x",
+   "hmrc"
+  ]
+ },
+ {
+  "id": "q045",
+  "question": "What freehold CRE max LTV of 75 percent applies in the UK?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "75 percent"
+  ]
+ },
+ {
+  "id": "q046",
+  "question": "What is IFRS 9 ECL: PD times LGD times EAD discounted?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "pd",
+   "lgd",
+   "ead"
+  ]
+ },
+ {
+  "id": "q047",
+  "question": "What is Stage 1: 12-month ECL for performing loans?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "12-month ecl",
+   "stage 1"
+  ]
+ },
+ {
+  "id": "q048",
+  "question": "What is Stage 2: lifetime ECL on significant increase in credit risk?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "lifetime ecl",
+   "stage 2"
+  ]
+ },
+ {
+  "id": "q049",
+  "question": "What is SICR in full?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "significant increase in credit risk"
+  ]
+ },
+ {
+  "id": "q050",
+  "question": "What SICR triggers: 30 days past due or PD doubling?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "30 days",
+   "pd doubling"
+  ]
+ },
+ {
+  "id": "q051",
+  "question": "What is Stage 3: credit-impaired at 90 days past due?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "90 days",
+   "stage 3"
+  ]
+ },
+ {
+  "id": "q052",
+  "question": "What scenarios are weighted: Bank of England base, upside, downside?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "bank of england",
+   "base",
+   "downside"
+  ]
+ },
+ {
+  "id": "q053",
+  "question": "What must the memo state: IFRS 9 stage, coverage ratio, cost of risk?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "ifrs 9 stage",
+   "coverage ratio",
+   "cost of risk"
+  ]
+ },
+ {
+  "id": "q054",
+  "question": "What forbearance flags: payment holiday, term extension, covenant waiver?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "payment holiday",
+   "term extension",
+   "covenant waiver"
+  ]
+ },
+ {
+  "id": "q055",
+  "question": "What probation applies before cure from Stage 2 to Stage 1: 2 years?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "2-year probation",
+   "stage 1"
+  ]
+ },
+ {
+  "id": "q056",
+  "question": "What FCA guidance covers vulnerable customers: FG21/1?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "fg21/1",
+   "vulnerable"
+  ]
+ },
+ {
+  "id": "q057",
+  "question": "What Breathing Space pause applies: 60 days under Debt Respite Scheme?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "60 days",
+   "breathing space"
+  ]
+ },
+ {
+  "id": "q058",
+  "question": "What CONC 7 rule requires forbearance before repossession?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "conc 7",
+   "forbearance"
+  ]
+ },
+ {
+  "id": "q059",
+  "question": "What arrears timeline: 15-day letter, 30-day call, 60-day review, 90-day litigation?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "15-day",
+   "30-day",
+   "60-day",
+   "90-day"
+  ]
+ },
+ {
+  "id": "q060",
+  "question": "What is last resort per MCOB 13 and pre-action protocol: repossession?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "repossession",
+   "mcob 13"
+  ]
+ },
+ {
+  "id": "q061",
+  "question": "What complaints timeline and body: 8 weeks and Financial Ombudsman Service?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "8 weeks",
+   "financial ombudsman"
+  ]
+ },
+ {
+  "id": "q062",
+  "question": "What MLR year and Acts govern UK financial crime: 2017, POCA 2002?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "money laundering regulations 2017",
+   "proceeds of crime act"
+  ]
+ },
+ {
+  "id": "q063",
+  "question": "What guidance is JMLSG?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "jmlsg"
+  ]
+ },
+ {
+  "id": "q064",
+  "question": "What CDD checks: Companies House, electoral roll, HMRC records?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "companies house",
+   "electoral roll",
+   "hmrc"
+  ]
+ },
+ {
+  "id": "q065",
+  "question": "When is EDD needed: high-risk countries, PEPs, complex structures?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "politically exposed",
+   "complex structures"
+  ]
+ },
+ {
+  "id": "q066",
+  "question": "What sanctions list is the OFSI consolidated list?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "ofsi"
+  ]
+ },
+ {
+  "id": "q067",
+  "question": "What reports go to the NCA and what consent is DAML?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "national crime agency",
+   "daml"
+  ]
+ },
+ {
+  "id": "q068",
+  "question": "What UK data law: UK GDPR and Data Protection Act 2018?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "uk gdpr",
+   "data protection act 2018"
+  ]
+ },
+ {
+  "id": "q069",
+  "question": "What loan-file retention applies: 6 years?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "6-year retention"
+  ]
+ },
+ {
+  "id": "q070",
+  "question": "What SAR timeline applies: 1 month for Subject Access Requests?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "1 month"
+  ]
+ },
+ {
+  "id": "q071",
+  "question": "List required UK credit memo sections.",
+  "gold_doc": "uk_01_credit_memo_overview.txt",
+  "expected_keywords": [
+   "executive summary",
+   "recommendation"
+  ]
+ },
+ {
+  "id": "q072",
+  "question": "Spread period: how many audited years?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "3 years"
+  ]
+ },
+ {
+  "id": "q073",
+  "question": "Leverage cap for senior unsecured borrowers?",
+  "gold_doc": "uk_02_financial_spreading.txt",
+  "expected_keywords": [
+   "3.5x"
+  ]
+ },
+ {
+  "id": "q074",
+  "question": "Order the three repayment sources.",
+  "gold_doc": "uk_03_cashflow_repayment.txt",
+  "expected_keywords": [
+   "operating cash flow",
+   "collateral",
+   "guarantor"
+  ]
+ },
+ {
+  "id": "q075",
+  "question": "Receivables advance rate?",
+  "gold_doc": "uk_04_collateral.txt",
+  "expected_keywords": [
+   "80 percent"
+  ]
+ },
+ {
+  "id": "q076",
+  "question": "Secured collateral coverage floor?",
+  "gold_doc": "uk_04_collateral.txt",
+  "expected_keywords": [
+   "1.25x"
+  ]
+ },
+ {
+  "id": "q077",
+  "question": "Expected loss components PD LGD EAD?",
+  "gold_doc": "uk_05_risk_rating.txt",
+  "expected_keywords": [
+   "pd",
+   "lgd",
+   "ead"
+  ]
+ },
+ {
+  "id": "q078",
+  "question": "UK affirmative covenants: statements, insurance, HMRC taxes?",
+  "gold_doc": "uk_06_covenants.txt",
+  "expected_keywords": [
+   "financial statements",
+   "hmrc"
+  ]
+ },
+ {
+  "id": "q079",
+  "question": "UK financial covenants: DSCR 1.20x, leverage 3.5x, net worth 5MM pounds?",
+  "gold_doc": "uk_06_covenants.txt",
+  "expected_keywords": [
+   "1.20x",
+   "5mm pounds"
+  ]
+ },
+ {
+  "id": "q080",
+  "question": "UK negative covenants: debt 500k, dividends, asset sales 200k?",
+  "gold_doc": "uk_06_covenants.txt",
+  "expected_keywords": [
+   "500k pounds",
+   "200k pounds"
+  ]
+ },
+ {
+  "id": "q081",
+  "question": "UK CPs: English law agreement, Companies House debenture, OFSI screening?",
+  "gold_doc": "uk_06_covenants.txt",
+  "expected_keywords": [
+   "companies house",
+   "ofsi"
+  ]
+ },
+ {
+  "id": "q082",
+  "question": "UK EOD: cross-default 100k, Insolvency Act administration?",
+  "gold_doc": "uk_06_covenants.txt",
+  "expected_keywords": [
+   "100k pounds",
+   "insolvency act"
+  ]
+ },
+ {
+  "id": "q083",
+  "question": "Tenor caps: 3 years revolver, 7 years equipment?",
+  "gold_doc": "uk_07_policy_exceptions.txt",
+  "expected_keywords": [
+   "3 years",
+   "7 years"
+  ]
+ },
+ {
+  "id": "q084",
+  "question": "SONIA spreads by rating: 200, 300, 450 bps?",
+  "gold_doc": "uk_07_policy_exceptions.txt",
+  "expected_keywords": [
+   "sonia",
+   "bps"
+  ]
+ },
+ {
+  "id": "q085",
+  "question": "Committee threshold 5MM pounds with SMCR sign-off?",
+  "gold_doc": "uk_07_policy_exceptions.txt",
+  "expected_keywords": [
+   "5mm pounds",
+   "smcr"
+  ]
+ },
+ {
+  "id": "q086",
+  "question": "Parent guarantee leverage trigger 4.0x?",
+  "gold_doc": "uk_08_guarantees.txt",
+  "expected_keywords": [
+   "4.0x"
+  ]
+ },
+ {
+  "id": "q087",
+  "question": "Comfort letter counted as support? Not a guarantee?",
+  "gold_doc": "uk_08_guarantees.txt",
+  "expected_keywords": [
+   "not a guarantee"
+  ]
+ },
+ {
+  "id": "q088",
+  "question": "Declining-industry DSCR 1.50x and leverage 2.5x?",
+  "gold_doc": "uk_09_industry_risk.txt",
+  "expected_keywords": [
+   "1.50x",
+   "2.5x"
+  ]
+ },
+ {
+  "id": "q089",
+  "question": "Approval chain: relationship manager, credit committee, board?",
+  "gold_doc": "uk_10_approval_process.txt",
+  "expected_keywords": [
+   "relationship manager",
+   "credit committee"
+  ]
+ },
+ {
+  "id": "q090",
+  "question": "Consumer Duty in force July 2023 under PRIN 2A?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "july 2023",
+   "prin 2a"
+  ]
+ },
+ {
+  "id": "q091",
+  "question": "MCOB vs CONC scope?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "mcob",
+   "conc"
+  ]
+ },
+ {
+  "id": "q092",
+  "question": "SONIA pricing SONIA plus 250 bps example?",
+  "gold_doc": "uk_11_regulatory.txt",
+  "expected_keywords": [
+   "sonia plus"
+  ]
+ },
+ {
+  "id": "q093",
+  "question": "ICR stressed 5.5 percent?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "5.5 percent"
+  ]
+ },
+ {
+  "id": "q094",
+  "question": "LTI 4.5x cap?",
+  "gold_doc": "uk_12_affordability_btl.txt",
+  "expected_keywords": [
+   "4.5x"
+  ]
+ },
+ {
+  "id": "q095",
+  "question": "Stage 2 lifetime ECL?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "lifetime ecl"
+  ]
+ },
+ {
+  "id": "q096",
+  "question": "2-year probation before Stage 1 cure?",
+  "gold_doc": "uk_13_ifrs9_provisions.txt",
+  "expected_keywords": [
+   "2-year probation"
+  ]
+ },
+ {
+  "id": "q097",
+  "question": "Breathing Space 60 days?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "60 days"
+  ]
+ },
+ {
+  "id": "q098",
+  "question": "Repossession last resort?",
+  "gold_doc": "uk_14_conduct_arrears.txt",
+  "expected_keywords": [
+   "repossession"
+  ]
+ },
+ {
+  "id": "q099",
+  "question": "OFSI consolidated list screening?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "ofsi"
+  ]
+ },
+ {
+  "id": "q100",
+  "question": "SARs to NCA with DAML consent?",
+  "gold_doc": "uk_15_kyc_aml.txt",
+  "expected_keywords": [
+   "national crime agency",
+   "daml"
+  ]
+ }
+]
